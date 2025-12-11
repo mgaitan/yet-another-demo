@@ -1,3 +1,7 @@
+> [!NOTE] 
+> This is a demo repo generated from my [Copier-based Python package template](https://github.com/mgaitan/python-package-copier-template). It exists only to showcase the default scaffold, workflows, and docs.
+
+
 # Yet Another Demo
 
 [![CI](https://github.com/mgaitan/yet-another-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/mgaitan/yet-another-demo/actions/workflows/ci.yml)
