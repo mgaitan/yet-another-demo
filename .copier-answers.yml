@@ -1,0 +1,15 @@
+# Changes here will be overwritten by Copier.
+_commit: v0.1.1-2-g022e3de
+_src_path: gh:mgaitan/python-package-copier-template
+author_email: gaitan@gmail.com
+author_fullname: Martín Gaitán
+author_username: mgaitan
+copyright_license: BSD-3-Clause
+gh_repo_create: public
+project_description: A (dummy) demo of my Copier template for Python packages
+project_name: Yet Another Demo
+python_package_command_line_name: yet-another-demo
+python_package_distribution_name: yet-another-demo
+python_package_import_name: yet_another_demo
+repository_name: yet-another-demo
+
