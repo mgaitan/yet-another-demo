@@ -2,19 +2,25 @@
 install: ## Install the virtual environment and install the pre-commit hooks
 	@echo "🚀 Creating virtual environment using uv"
 	@uv sync
+	@if command -v prek >/dev/null 2>&1; then \
+		echo "🪝 Installing git hooks with prek"; \
+		prek install; \
+	else \
+		echo "ℹ️  prek is not installed. Install it with: uv tool install prek"; \
+	fi
 
 .PHONY: test qa
 test: ## Run tests with coverage
 	@echo "🧪 Running tests with coverage"
 	@uv run pytest
 
-qa: ## Run local QA checks (Ruff + Ty)
-	@echo "🔍 Running Ruff lint checks"
-	@uv run ruff check --fix
-	@echo "✨ Verifying Ruff formatting"
-	@uv run ruff format --check
-	@echo "🧹 Running Ty checks"
-	@uv run ty check
+qa: ## Run local QA checks via prek
+	@if command -v prek >/dev/null 2>&1; then \
+		echo "🔍 Running prek checks"; \
+		prek run --all-files; \
+	else \
+		echo "ℹ️  prek is not installed. Install it with: uv tool install prek"; \
+	fi
 
 .PHONY: bump
 bump:
@@ -23,25 +29,9 @@ bump:
 .PHONY: release
 release: ## Create a GitHub release for the current version
 	@version=$$(uv version --short); \
-	git commit -m "Bump $$version"; \
+	git commit -am "Bump $$version"; \
 	git push origin main; \
 	gh release create "$$version" --generate-notes
-
-.PHONY: gh-publish
-gh-publish: ## Create GitHub repo with gh (if missing) and push main
-	@if ! command -v gh >/dev/null 2>&1; then \
-		echo "❌ gh CLI not found; install https://cli.github.com/"; exit 1; \
-	fi
-	@set -e; \
-	repo="mgaitan/yet-another-demo"; \
-	url="git@github.com:$$repo.git"; \
-	if gh repo view "$$repo" >/dev/null 2>&1; then \
-		git remote add origin "$$url" 2>/dev/null || git remote set-url origin "$$url"; \
-	else \
-		gh repo create "$$repo" --description "A (dummy) demo of my Copier template for Python packages" --source=. --private --push --remote=origin; \
-		exit 0; \
-	fi; \
-	git push -u origin main
 
 .PHONY: docs docs-html docs-epub docs-open html epub open
 

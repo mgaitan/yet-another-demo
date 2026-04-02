@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier.
-_commit: '0.2'
+_commit: 0.4.2
 _src_path: gh:mgaitan/python-package-copier-template
 author_email: gaitan@gmail.com
 author_fullname: Martín Gaitán
@@ -12,4 +12,3 @@ python_package_command_line_name: yet-another-demo
 python_package_distribution_name: yet-another-demo
 python_package_import_name: yet_another_demo
 repository_name: yet-another-demo
-

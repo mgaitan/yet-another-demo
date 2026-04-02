@@ -9,7 +9,7 @@ Nothing easier!
 Fork and clone the repository, then:
 
 ```bash
-cd yet-another-demo
+cd {{ repository_name }}
 uv sync
 ```
 
@@ -29,7 +29,10 @@ curl -LsSf https://astral.sh/uv/install.ps1 | powershell
 
 You now have the dependencies installed.
 
-You can run the application with `uv run yet-another-demo [ARGS...]`.
+{% if python_package_command_line_name -%}
+You can run the application with `uv run {{ python_package_command_line_name }} [ARGS...]`.
+
+{% endif -%}
 
 ## Development
 

@@ -3,6 +3,8 @@ name: Copier Template Update
 on:
   schedule:
     - cron: "0 0 */20 * *"
+  repository_dispatch:
+    types: [template-release]
   workflow_dispatch:
 
 permissions:
@@ -23,7 +25,7 @@ jobs:
           echo "before=$before" >> "$GITHUB_OUTPUT"
 
       - name: Refresh from template
-        run: uvx copier update --trust --defaults .
+        run: uvx git+https://github.com/mgaitan/python-package-copier-template -- .
 
       - name: Capture template version (after)
         id: template-version-after
@@ -35,13 +37,13 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "chore: update project template"
-          title: "chore: update project template to ${{ steps.template-version-after.outputs.after }}"
+          title: "chore: update project template to {% raw %}${{ steps.template-version-after.outputs.after }}"
           body: |
             Automated template refresh via `uvx copier update --trust --defaults .`.
 
             Template version:
-            - before: {% raw %}${{ steps.template-version-before.outputs.before }}
-            - after: ${{ steps.template-version-after.outputs.after }}
+            - before: {% raw %}${{ steps.template-version-before.outputs.before }}{% endraw %}
+            - after: {% raw %}${{ steps.template-version-after.outputs.after }}{% endraw %}
 
             Template releases: https://github.com/mgaitan/python-package-copier-template/releases
           branch: chore/update-template

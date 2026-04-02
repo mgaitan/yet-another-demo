@@ -1,38 +1,79 @@
-# Yet Another Demo
+# {{ project_name }}
 
-[![ci](https://github.com/mgaitan/yet-another-demo/workflows/ci/badge.svg)](https://github.com/mgaitan/yet-another-demo/actions?query=workflow%3Aci)
-[![docs](https://img.shields.io/badge/docs-blue.svg?style=flat)](https://mgaitan.github.io/yet-another-demo/)
-[![pypi version](https://img.shields.io/pypi/v/yet-another-demo.svg)](https://pypi.org/project/yet-another-demo/)
-[![Changelog](https://img.shields.io/github/v/release/mgaitan/yet-another-demo?include_prereleases&label=changelog)](https://github.com/mgaitan/yet-another-demo/releases)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/mgaitan/yet-another-demo/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mgaitan/yet-another-demo/blob/main/LICENSE)
+[![ci](https://github.com/{{ repository_namespace }}/{{ repository_name }}/workflows/ci/badge.svg)](https://github.com/{{ repository_namespace }}/{{ repository_name }}/actions?query=workflow%3Aci)
+[![docs](https://img.shields.io/badge/docs-blue.svg?style=flat)](https://{{ repository_namespace }}.github.io/{{ repository_name }}/)
+[![pypi version](https://img.shields.io/pypi/v/{{ python_package_distribution_name }}.svg)](https://pypi.org/project/{{ python_package_distribution_name }}/)
+[![Changelog](https://img.shields.io/github/v/release/{{ repository_namespace }}/{{ repository_name }}?include_prereleases&label=changelog)](https://github.com/{{ repository_namespace }}/{{ repository_name }}/releases)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/ci.yml)
+[![ty](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ty/main/assets/badge/v0.json)](https://github.com/astral-sh/ty)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/{{ repository_namespace }}/{{ repository_name }}/blob/main/LICENSE)
 
-A (dummy) demo of my Copier template for Python packages
+{{ project_description }}
 
 ## Quick Start
 
-Run directly without installing via `uvx`
+{% if python_package_command_line_name -%}
+Run directly without installing via `uvx`:
 
 ```bash
-uvx yet-another-demo --help
+uvx{% if python_package_command_line_name != python_package_distribution_name %} --with={{ python_package_distribution_name }}{% endif %} {{ python_package_command_line_name }} --help
 ```
 
-```{richterm} env PYTHONPATH=../src uv run -m yet_another_demo --help
+When running from source, we use {term}`PYTHONPATH` in docs examples so the local package is importable without an install step.
+
+```{richterm} env PYTHONPATH=../src uv run -m {{ python_package_import_name }} --help
 :hide-command: true
 ```
 
-To install the tool permanently:
+{% endif -%}
+To install the tool permanently, use:
 
 ```bash
-uv tool install yet-another-demo
+uv tool install {{ python_package_distribution_name }}
 ```
+
+## Documentation Map (Diataxis)
+
+This project follows the [Diataxis](https://diataxis.fr/) framework:
+
+- Tutorials: learning-oriented, step-by-step.
+- How-to guides: goal-oriented operational procedures.
+- Reference: factual, lookup-first technical details.
+- Explanation: context, rationale, and design choices.
 
 
 ```{toctree}
 :maxdepth: 2
-:caption: Documentation
+:caption: Tutorials
+
+getting_started.md
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: How-to Guides
+
+development_workflow.md
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Reference
+
+configuration.md
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Explanation
+
+about_the_docs.md
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Project Policies
 
 ../CONTRIBUTING.md
 ../CODE_OF_CONDUCT.md
-about_the_docs.md
 ```

@@ -1,8 +1,9 @@
 """
-Yet Another Demo
+{{ project_name }}
 
-A (dummy) demo of my Copier template for Python packages
+{{ project_description }}
 """
+{%- if python_package_command_line_name %}
 
 import argparse
 from importlib import metadata
@@ -10,14 +11,14 @@ from importlib import metadata
 
 def get_version() -> str:
     try:
-        return metadata.version("yet-another-demo")
+        return metadata.version("{{ python_package_distribution_name }}")
     except metadata.PackageNotFoundError:
         return "unknown"
 
 
 def get_parser() -> argparse.ArgumentParser:
     """Return the CLI argument parser."""
-    parser = argparse.ArgumentParser(prog="yet-another-demo")
+    parser = argparse.ArgumentParser(prog="{{ python_package_command_line_name }}")
     parser.add_argument("-V", "--version", action="version", version=f"%(prog)s {get_version()}")
     return parser
 
@@ -31,3 +32,6 @@ def main(args: list[str] | None = None) -> int:
 
 
 __all__: list[str] = ["get_parser", "main"]
+{%- else %}
+__all__: list[str] = []
+{%- endif %}
