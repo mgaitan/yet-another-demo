@@ -6,9 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "{{ python_package_distribution_name }}"
-copyright = "2025, {{ author }}"
-author = "{{ author }}"
+project = "yet-another-demo"
+copyright = "2025, "
+author = ""
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -36,7 +36,7 @@ myst_url_schemes = {
     "http": None,
     "https": None,
     "gh": {
-        "url": "https://github.com/{{ repository_namespace }}/{{ repository_name }}/main/{{path}}#{{fragment}}",
+        "url": "https://github.com/mgaitan/yet-another-demo/main/#",
         "title": "",
         "classes": ["github"],
     },

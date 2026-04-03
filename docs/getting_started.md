@@ -16,21 +16,15 @@ This resolves dependencies and creates the local virtual environment.
 
 If this project includes a CLI command:
 
-{% if python_package_command_line_name -%}
 ```bash
-uv run {{ python_package_command_line_name }} --help
+uv run yet-another-demo --help
 ```
 
 When invoking modules directly from source, set {term}`PYTHONPATH` so imports resolve cleanly:
 
 ```bash
-PYTHONPATH=src uv run -m {{ python_package_import_name }} --help
+PYTHONPATH=src uv run -m yet_another_demo --help
 ```
-{% else -%}
-The default scaffold includes a package but no shell command name.
-Run module-level checks and tests instead (`make qa`, `make test`).
-{% endif -%}
-
 ## 3. Run quality checks
 
 ```bash

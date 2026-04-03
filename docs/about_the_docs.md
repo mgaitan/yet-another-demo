@@ -43,7 +43,7 @@ We ship [richterm](https://github.com/mgaitan/richterm) for CLI captures and
 
 - release/manual runs publish canonical docs,
 - PRs with docs changes publish previews under
-  `https://{{ repository_namespace }}.github.io/{{ repository_name }}/_preview/pr-<PR_NUMBER>/`.
+  `https://mgaitan.github.io/yet-another-demo/_preview/pr-<PR_NUMBER>/`.
 
 For manual dispatch using `gh` CLI, authentication usually relies on {term}`GH_TOKEN`.
 Workflow internals rely on {term}`GITHUB_TOKEN`.

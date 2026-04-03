@@ -1,8 +1,8 @@
-Project: {{ project_name }}
+Project: Yet Another Demo
 
-Repository: https://github.com/{{ repository_namespace }}/{{ repository_name }}
+Repository: https://github.com/mgaitan/yet-another-demo
 
-Description: {{ project_description }}
+Description: A (dummy) demo of my Copier template for Python packages
 
 ## Stack
 
@@ -56,8 +56,8 @@ Description: {{ project_description }}
 - Use `docs/about_the_docs.md` as the canonical chapter for documentation principles and design rationale.
 - Keep env var definitions in `docs/configuration.md` using the Sphinx `glossary` directive.
 - When mentioning an env var in docs, reference it as a glossary term (`{term}`).
-- Documentation previews for PRs with docs changes are published under `https://{{ repository_namespace }}.github.io/{{ repository_name }}/_preview/pr-<PR_NUMBER>/`.
-- Release/manual docs publish uses the canonical site URL: `https://{{ repository_namespace }}.github.io/{{ repository_name }}/`.
+- Documentation previews for PRs with docs changes are published under `https://mgaitan.github.io/yet-another-demo/_preview/pr-<PR_NUMBER>/`.
+- Release/manual docs publish uses the canonical site URL: `https://mgaitan.github.io/yet-another-demo/`.
 - Provide documentation for:
   - **Users:** intention, behaviour, minimal examples.
   - **Contributors (humans + agents):** technical details, internal references, short code explanations.

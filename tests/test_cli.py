@@ -8,7 +8,7 @@ from importlib import metadata
 
 import pytest
 
-from {{ python_package_import_name }} import get_version, main
+from yet_another_demo import get_version, main
 
 
 def test_main():
@@ -25,7 +25,7 @@ def test_show_help(capsys: pytest.CaptureFixture):
     with pytest.raises(SystemExit):
         main(["-h"])
     captured = capsys.readouterr()
-    assert "{{ python_package_command_line_name }}" in captured.out
+    assert "yet-another-demo" in captured.out
 
 
 def test_show_version(mocker, capsys: pytest.CaptureFixture):
@@ -35,7 +35,7 @@ def test_show_version(mocker, capsys: pytest.CaptureFixture):
         mocker: pytest-mock fixture to patch get_version.
         capsys: Pytest fixture to capture output.
     """
-    mocker.patch("{{ python_package_import_name }}.get_version", return_value="0.1.0")
+    mocker.patch("yet_another_demo.get_version", return_value="0.1.0")
     with pytest.raises(SystemExit):
         main(["-V"])
     captured = capsys.readouterr()
@@ -44,9 +44,9 @@ def test_show_version(mocker, capsys: pytest.CaptureFixture):
 
 def test_main_module(mocker):
     """Test running the CLI via __main__ (python -m ...)."""
-    module_name = "{{ python_package_import_name }}.__main__"
-    # Simulate: python -m {{ python_package_command_line_name }} --version
-    mocker.patch.object(sys, "argv", ["{{ python_package_command_line_name }}", "-V"])
+    module_name = "yet_another_demo.__main__"
+    # Simulate: python -m yet-another-demo --version
+    mocker.patch.object(sys, "argv", ["yet-another-demo", "-V"])
     with pytest.raises(SystemExit):
         runpy.run_module(module_name, run_name="__main__", alter_sys=False)
 
