@@ -1,5 +1,4 @@
-"""
-Yet Another Demo
+"""Yet Another Demo.
 
 A (dummy) demo of my Copier template for Python packages
 """
@@ -9,6 +8,7 @@ from importlib import metadata
 
 
 def get_version() -> str:
+    """Return the installed package version."""
     try:
         return metadata.version("yet-another-demo")
     except metadata.PackageNotFoundError:
