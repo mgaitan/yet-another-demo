@@ -38,9 +38,15 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v8.2.0
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.1.0
       - run: uv build
+
+      - name: Smoke test built wheel in isolation
+        run: |
+          wheel=$(find dist -name '*.whl' -print -quit)
+          test -n "$wheel"
+          uv run --isolated --no-project --with "$wheel" python -c "import yet_another_demo"
 
       - name: Generate PEP 740 publish attestations
         uses: astral-sh/attest-action@f589a42a7efb6fe400b4f400de60b4bc90390027 # v0.0.6
@@ -68,20 +74,20 @@ jobs:
   docs-publish:
     name: Publish documentation to GitHub Pages
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name != 'release' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
     environment:
       name: ${{ github.event_name == 'pull_request' && 'github-pages-preview' || 'github-pages' }}
       url: ${{ steps.preview_url.outputs.url }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
       - name: Detect documentation preview target
         id: preview
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "docs_subdir=_preview/pr-${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
           fi
-      - uses: actions/configure-pages@v5
-      - uses: astral-sh/setup-uv@v8.2.0
+      - uses: actions/configure-pages@v6.0.0
+      - uses: astral-sh/setup-uv@v10.1.0
       - run: make docs
       - name: Stage documentation artifact
         run: |
@@ -95,11 +101,11 @@ jobs:
             mkdir -p "$out_dir"
             cp -a docs/_build/html/. "$out_dir/"
           fi
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: site
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5.0.1
       - name: Compute documentation URL
         id: preview_url
         run: |
