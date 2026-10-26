@@ -74,4 +74,5 @@ about_the_docs.md
 
 ../CONTRIBUTING.md
 ../CODE_OF_CONDUCT.md
+../SECURITY.md
 ```

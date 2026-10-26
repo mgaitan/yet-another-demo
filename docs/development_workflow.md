@@ -26,14 +26,23 @@ make qa
 make test
 ```
 
-## Publish a release
+Commit `uv.lock` after dependency changes. The local `uv-lock` prek hook refreshes
+it when dependency configuration changes, and CI checks `uv lock --check`.
+
+## Prepare a release
+
+Start from a clean, up-to-date `main` and run the project checks first:
 
 ```bash
-make bump
-make release
+make qa
+make test
+make release-pr BUMP=minor
 ```
 
-Release workflows publish package artifacts and canonical docs.
+`BUMP` accepts `patch`, `minor`, or `major`. Review the version and generated notes
+in the `release/<version>` PR. Merging publishes to PyPI and creates the GitHub
+release automatically, without a draft or manual tag. Documentation updates on
+pushes to `main`; manual workflow dispatch only publishes documentation.
 
 ## Preview documentation in pull requests
 

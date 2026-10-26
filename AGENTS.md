@@ -45,7 +45,7 @@ Description: A (dummy) demo of my Copier template for Python packages
 - Prefer `gh` CLI for all interactions with GitHub if possible. Eg. Use it to open PRs / manage issues.
 - For `gh pr` interactions, prefer `--body-file` with a temporary file created under `/tmp/`.
 - To request review from a specific user or agent, use `gh`; for example, `gh pr edit --add-reviewer @copilot`.
-- When a repository defines release targets in `Makefile`, prefer those targets over ad-hoc release commands. Use the repository's release target to run checks and publish a release. When preparing a version-bump PR, use its bump target.
+- Releases: run checks, then `make release-pr`. Review the version and notes in the PR; merging publishes PyPI and the GitHub release through `cd.yml`, without drafts or manual tags.
 - For issue categorization, use GitHub labels instead of title prefixes like `Bug:`, `Feat:`, or `Docs:`.
 - Before assigning labels, inspect labels already used in the target repository and follow that taxonomy first.
 - If labels are missing or incomplete, use this baseline set: `bug`, `enhancement`, `documentation`, `maintenance`, `refactor`, `test`, `ci`, `dependencies`, `security`, `performance`, `ux`, `question`.

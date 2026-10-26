@@ -20,6 +20,7 @@ extensions = [
     "myst_parser",
     "sphinxcontrib.mermaid",
     "richterm.sphinxext",
+    "sphinx_llms_txt",
 ]
 
 richterm_prompt = "[bold]$"
@@ -41,3 +42,5 @@ myst_url_schemes = {
         "classes": ["github"],
     },
 }
+
+llms_txt_uri_template = "_sources/{docname}{suffix}{sourcelink_suffix}"
